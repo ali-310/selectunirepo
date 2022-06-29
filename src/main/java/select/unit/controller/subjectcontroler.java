@@ -2,8 +2,7 @@ package select.unit.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import select.unit.exceptions.myIOexception;
-import select.unit.exceptions.myexception;
+import select.unit.exceptions2.messageexception;
 import select.unit.models.Subject;
 import select.unit.services.subjectservice;
 
@@ -43,11 +42,11 @@ public class subjectcontroler {
     }
 
     @GetMapping("/getsubjectsbyid/{id}")
-    public ResponseEntity<Void> getallcourse(@PathVariable("id") long id) throws myexception {
+    public ResponseEntity<Void> getallcourse(@PathVariable("id") long id) throws messageexception {
         return subjser.getsubjbyid(id);
     }
     @DeleteMapping("/deletsubject/{id}")
-    public ResponseEntity<Void> deletbyid(@PathVariable("id") long id) throws myIOexception {
+    public ResponseEntity<Void> deletbyid(@PathVariable("id") long id) throws messageexception {
 
         return  subjser.deletbyid(id);
     }

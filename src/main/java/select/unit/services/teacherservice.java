@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import select.unit.Interfaces.Iteacher;
-import select.unit.exceptions.myruntimeexception;
+import select.unit.exceptions2.messageexception;
 import select.unit.models.Student;
-import select.unit.models.Subject;
 import select.unit.models.Teachers;
 import select.unit.repository.Studentrepository;
 import select.unit.repository.teacherrepository;
@@ -63,7 +62,7 @@ public class teacherservice implements Iteacher {
             trepo.save(t1);
         }
         else {
-            throw new myruntimeexception("somthing is wrong ! maybe teacher with this id or student is not found !  ");
+            throw new messageexception("somthing is wrong ! maybe teacher with this id or student is not found !  ");
         }
         return  ResponseEntity.status(HttpURLConnection.HTTP_OK).build();
     }
@@ -77,7 +76,7 @@ try {
     trepo.save(teacher);
    }
   catch (Exception e){
-    throw new myruntimeexception("somthing is wrong ! maybe teacher with this id or student is not found !  "+e.getMessage());
+    throw new messageexception("somthing is wrong ! maybe teacher with this id or student is not found !  "+e.getMessage());
 
    }
 

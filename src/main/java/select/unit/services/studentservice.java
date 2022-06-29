@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import select.unit.Interfaces.Istudent;
+import select.unit.exceptions2.badrequestxceptionmessage;
+import select.unit.exceptions2.foundokstatus;
+import select.unit.exceptions2.messageexception;
 import select.unit.repository.Studentrepository;
 import select.unit.models.Student;
 
@@ -32,9 +35,9 @@ public class studentservice implements Istudent {
             studentrepo.save(st);
 
         }catch (Exception e){
-            throw new BadRequestException(e.getMessage());
+            throw new badrequestxceptionmessage("bad request exception for this student");
         }
-        return  ResponseEntity.status(HttpURLConnection.HTTP_CREATED).build();
+        throw new foundokstatus("added"+st.getId());
     }
     @Override
     public ResponseEntity<Void> serchbyid(Student parmstudent, long id){
@@ -45,9 +48,9 @@ public class studentservice implements Istudent {
             studentrepo.save(st1);
         }
         else {
-            throw new RuntimeException("runtime exception on updating");
+            throw new messageexception("runtime exception on updating");
         }
-        return  ResponseEntity.status(HttpURLConnection.HTTP_OK).build();
+       throw new foundokstatus("founded");
     }
     @Override
     public ResponseEntity<Void> deletbyid(long id){
@@ -58,9 +61,9 @@ public class studentservice implements Istudent {
         }
         else
         {
-            throw new RuntimeException("student with this id"+id+" is not found");
+            throw new messageexception("student with this id"+id+" is not found");
         }
-        return  ResponseEntity.status(HttpURLConnection.HTTP_OK).build();
+        throw new foundokstatus("founded");
     }
 
     @Override
@@ -87,7 +90,7 @@ public class studentservice implements Istudent {
                     .body(new ByteArrayResource(student.getImage()));
         }
         catch (Exception e){
-            throw new RuntimeException("somthing is wrong for this id "+e.getMessage());
+            throw new messageexception("somthing is wrong for this id "+e.getMessage());
 
         }
 

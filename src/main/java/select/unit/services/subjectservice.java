@@ -5,9 +5,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import select.unit.Interfaces.Isubject;
-import select.unit.exceptions.myIOexception;
-import select.unit.exceptions.myexception;
-import select.unit.exceptions.myruntimeexception;
+import select.unit.exceptions2.messageexception;
 import select.unit.models.Student;
 import select.unit.models.Subject;
 import select.unit.models.Teachers;
@@ -66,16 +64,16 @@ public class subjectservice implements Isubject {
           subrepo.save(subject);
       }
       catch (Exception e){
-          throw new myruntimeexception("somthing is wrong ! maybe teacher with this id or student is not found !  "+e.getMessage());
+          throw new messageexception("somthing is wrong ! maybe teacher with this id or student is not found !  "+e.getMessage());
       }
         return  ResponseEntity.status(HttpURLConnection.HTTP_CREATED).build();
     }
 
-    public ResponseEntity<Void> getsubjbyid( long id) throws myexception {
+    public ResponseEntity<Void> getsubjbyid( long id) throws messageexception {
         Optional<Subject> subject =subrepo.findById(id);
 
      if(!subject.isPresent()){
-        throw new myexception("no exsist !");
+        throw new messageexception("no exsist !");
      }
      else
         return  ResponseEntity.status(HttpURLConnection.HTTP_CREATED).build();
@@ -84,14 +82,14 @@ public class subjectservice implements Isubject {
 
 
     @Override
-    public ResponseEntity<Void> deletbyid(long id) throws myIOexception {
+    public ResponseEntity<Void> deletbyid(long id) throws messageexception {
         Optional<Subject> subject= subrepo.findById(id);
         if(subject.isPresent()){
             subrepo.deleteById(id);
         }
         else
         {
-            throw new myIOexception("this is is not found! try again");
+            throw new messageexception("this is is not found! try again");
         }
         return  ResponseEntity.status(HttpURLConnection.HTTP_OK).build();
     }
